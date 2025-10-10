@@ -1,0 +1,3 @@
+*.tar
+*.log
+test/llava-1.5-7b-hf-bnb-4bit
