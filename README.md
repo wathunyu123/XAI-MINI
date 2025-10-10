@@ -6,3 +6,5 @@ Docker Container Deployment for MSSQL and Apache Airflow
 - Institution: Prince of Songkla University
 - Department: Computer Engineering
 - Degree: Master
+## Summary Document
+- [`SUMMARY.md`]: https://github.com/wathunyu123/XAI-MINI/blob/main/SUMMARY.md
