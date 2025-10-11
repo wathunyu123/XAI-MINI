@@ -1,14 +1,29 @@
 {
   "image_path": "evaluation_dataset/anterior_teeth/case_anatomy.jpg",
-  "expert_narrative": "The image shows the 12 untreated anterior teeth, including six in the upper maxillary arch and six in the lower mandibular arch. The teeth appear anatomically normal with no signs of caries, restorations, or significant pathology.",
+  "expert_narrative": "This intraoral photograph displays a full-mouth cosmetic rehabilitation, most likely with porcelain veneers or full ceramic crowns on all visible teeth. The restorations are uniform in color, exhibit a high value (brightness), and are well-aligned, creating an aesthetic smile. The surrounding gingiva appears healthy, pink, and firm, with well-adapted margins around the restorations, indicating good periodontal health and oral hygiene. The teeth are shown in centric occlusion. Note the presence of slight physiological melanin pigmentation on the lower anterior gingiva.",
   "anterior_teeth_findings": {
-    "6": { "status": "normal", "notes": "" },
-    "7": { "status": "normal", "notes": "" },
-    "8": { "status": "normal", "notes": "" },
-    "9": { "status": "normal", "notes": "" },
-    "10": { "status": "normal", "notes": "" },
-    "11": { "status": "normal", "notes": "" }
+    "6": { "status": "restoration", "notes": "Full coverage restoration, likely a porcelain veneer or crown." },
+    "7": { "status": "restoration", "notes": "Full coverage restoration, likely a porcelain veneer or crown." },
+    "8": { "status": "restoration", "notes": "Full coverage restoration, likely a porcelain veneer or crown." },
+    "9": { "status": "restoration", "notes": "Full coverage restoration, likely a porcelain veneer or crown." },
+    "10": { "status": "restoration", "notes": "Full coverage restoration, likely a porcelain veneer or crown." },
+    "11": { "status": "restoration", "notes": "Full coverage restoration, likely a porcelain veneer or crown." },
+    "22": { "status": "restoration", "notes": "Full coverage restoration, likely a porcelain veneer or crown." },
+    "23": { "status": "restoration", "notes": "Full coverage restoration, likely a porcelain veneer or crown." },
+    "24": { "status": "restoration", "notes": "Full coverage restoration, likely a porcelain veneer or crown." },
+    "25": { "status": "restoration", "notes": "Full coverage restoration, likely a porcelain veneer or crown." },
+    "26": { "status": "restoration", "notes": "Full coverage restoration, likely a porcelain veneer or crown." },
+    "27": { "status": "restoration", "notes": "Full coverage restoration, likely a porcelain veneer or crown." }
   },
-  "key_keywords_expected": ["anterior teeth", "incisor", "canine", "maxillary", "mandibular", "normal"],
-  "analysis_focus": "Baseline check: Does the model correctly identify and describe normal anatomy as seen in training data?"
+  "key_keywords_expected": [
+      "restoration",
+      "crown",
+      "veneer",
+      "cosmetic",
+      "aesthetic",
+      "healthy gingiva",
+      "maxillary",
+      "mandibular"
+    ],
+  "analysis_focus": "Test the model's ability to recognize and describe extensive cosmetic restorations (veneers/crowns) and differentiate them from natural, untreated teeth. Also checks for recognition of healthy gingival tissue."
 }

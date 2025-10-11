@@ -1,14 +1,29 @@
 {
   "image_path": "evaluation_dataset/anterior_teeth/case_001.jpg",
-  "expert_narrative": "The radiograph shows a porcelain-fused-to-metal (PFM) crown on the maxillary right central incisor (#8) and a distinct periapical radiolucency at the apex of the maxillary right lateral incisor (#7), consistent with a periapical lesion. Other anterior teeth appear to be within normal limits.",
+  "expert_narrative": "This intraoral photograph shows the anterior teeth in centric occlusion. The overall oral hygiene appears fair, with signs of mild gingival inflammation (gingivitis) characterized by redness and slight swelling along the gum margins, particularly in the mandibular anterior region. There is evidence of slight marginal gingival recession on the lower incisors. The maxillary teeth are well-aligned. The mandibular anterior teeth exhibit minor crowding. Slight incisal attrition (wear) is visible on the edges of the lower incisors. No obvious caries, fractures, or restorations are apparent in this view.",
   "anterior_teeth_findings": {
-    "6": { "status": "normal", "notes": "" },
-    "7": { "status": "pathology", "notes": "periapical radiolucency indicating a lesion" },
-    "8": { "status": "restoration", "notes": "presence of a PFM crown" },
-    "9": { "status": "normal", "notes": "" },
-    "10": { "status": "normal", "notes": "" },
-    "11": { "status": "normal", "notes": "" }
+    "6": { "status": "normal", "notes": "Healthy appearance." },
+    "7": { "status": "normal", "notes": "Healthy appearance." },
+    "8": { "status": "normal", "notes": "Healthy appearance." },
+    "9": { "status": "normal", "notes": "Healthy appearance." },
+    "10": { "status": "normal", "notes": "Healthy appearance." },
+    "11": { "status": "normal", "notes": "Healthy appearance." },
+    "22": { "status": "periodontal_issue", "notes": "Mild gingival inflammation and slight recession." },
+    "23": { "status": "periodontal_issue", "notes": "Mild gingival inflammation, slight recession, minor crowding, and incisal attrition." },
+    "24": { "status": "periodontal_issue", "notes": "Mild gingival inflammation, slight recession, minor crowding, and incisal attrition." },
+    "25": { "status": "periodontal_issue", "notes": "Mild gingival inflammation, slight recession, minor crowding, and incisal attrition." },
+    "26": { "status": "periodontal_issue", "notes": "Mild gingival inflammation, slight recession, minor crowding, and incisal attrition." },
+    "27": { "status": "periodontal_issue", "notes": "Mild gingival inflammation and slight recession." }
   },
-  "key_keywords_expected": ["crown", "lesion", "periapical", "restoration", "pathology"],
-  "analysis_focus": "Hypothesis test: How does the model react to unseen features (pathology/restoration)? Check for Omission, Mischaracterization, or successful Generalization."
+  "key_keywords_expected": [
+      "gingival inflammation", 
+      "gingivitis", 
+      "recession", 
+      "crowding", 
+      "attrition", 
+      "wear", 
+      "mandibular", 
+      "anterior"
+    ],
+  "analysis_focus": "Test model's ability to identify subtle, non-carious findings like mild inflammation, recession, and wear, which are common but difficult to detect."
 }

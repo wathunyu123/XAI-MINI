@@ -1,27 +1,30 @@
 import os
 import json
 import glob
-from main_model_functions import LLaVADentist # นำเข้า Class ที่เราสร้างไว้จากไฟล์อื่น
+from LLaVADentist import LLaVADentist
+from CreateSummaryHeatMap import create_summary_heatmap
 import cv2
 
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+from matplotlib.colors import ListedColormap
+
 # --- การตั้งค่า ---
-# Path กลับไปใช้ Base Model และ Adapter ตามเดิม
 BASE_MODEL_PATH = "llava-1.5-7b-hf-bnb-4bit"
 ADAPTER_PATH = "adapter"
 
-# Path ไปยังโฟลเดอร์ที่เก็บชุดข้อมูลทดสอบ (ไฟล์ .json และรูปภาพ)
 EVAL_DATA_DIR = "evaluation_dataset/anterior_teeth/"
-# Path ไปยังโฟลเดอร์ที่จะใช้เก็บผลลัพธ์ทั้งหมด
 OUTPUT_DIR = "evaluation_results/"
-# คำสั่งหลักที่เราจะป้อนให้กับโมเดล
 INSTRUCTION = "You are an expert specializing in dentistry. Describe the condition of the anterior teeth in this dentistry with clinical accuracy, mentioning any anatomy, pathology, or restorations."
 
+# --- ฟังก์ชันหลักสำหรับรัน Evaluation ---
 def main():
     # --- ขั้นตอนที่ 1: เตรียมโฟลเดอร์สำหรับเก็บผลลัพธ์ ---
     results_json_dir = os.path.join(OUTPUT_DIR, "results_json")
     heatmaps_dir = os.path.join(OUTPUT_DIR, "heatmaps")
     os.makedirs(results_json_dir, exist_ok=True) # สร้างโฟลเดอร์ถ้ายังไม่มี
-    os.makedirs(heatmaps_dir, exist_ok=True)
+    os.makedirs(heatmaps_dir, exist_ok=True) # สร้างโฟลเดอร์ถ้ายังไม่มี
 
     # --- ขั้นตอนที่ 2: โหลดโมเดล ---
     # เรียกใช้ Class LLaVADentist โดยส่ง Path ของ Base Model และ Adapter เข้าไป
@@ -65,14 +68,19 @@ def main():
             
             # --- ขั้นตอนที่ 3.2: รวบรวม Keywords ที่จะใช้สร้าง Heatmap ---
             # ดึงคำทั้งหมดจาก Narrative ที่โมเดลสร้างขึ้น
-            keywords_in_narrative = {word.strip(".,!?") for word in generated_narrative.lower().split()}
+            # ใช้ generated_narrative.lower() เพื่อให้การเปรียบเทียบไม่สนตัวพิมพ์เล็ก/ใหญ่
+            keywords_in_narrative = generated_narrative.lower()
             # ดึงคำที่คาดหวัง (Expected) จากไฟล์ Ground Truth
             expected_keywords = ground_truth.get("key_keywords_expected", [])
-            # รวมคำจากทั้งสองแหล่งเข้าด้วยกัน เพื่อให้ครอบคลุมทั้งคำที่โมเดลพูด และคำที่โมเดลควรจะพูด
-            all_keywords_to_check = set(expected_keywords) | keywords_in_narrative
+            # สร้างลิสต์คำที่จะตรวจสอบทั้งหมด
+            all_keywords_to_check = set(expected_keywords) | {word.strip(".,!?") for word in keywords_in_narrative.split()}
             
             # กำหนดลิสต์ของคำศัพท์ที่เกี่ยวข้องทางคลินิกที่เราสนใจ
-            relevant_keywords = ["anterior", "incisor", "canine", "maxillary", "mandibular", "normal", "untreated", "crown", "lesion", "periapical", "restoration", "pathology", "fracture", "bone", "loss"]
+            relevant_keywords = [
+                "anterior", "bone", "canine", "central incisor", "crown", "fracture", 
+                "incisor", "lateral incisor", "lesion", "loss", "mandibular", "maxillary", 
+                "normal", "pathology", "periapical", "restoration", "untreated"
+            ]
             # กรองเอาเฉพาะคำที่อยู่ในลิสต์ที่เราสนใจ เพื่อสร้าง Heatmap
             keywords_to_generate_heatmap_for = [kw for kw in relevant_keywords if kw in all_keywords_to_check]
             print(f"Keywords for heatmap generation: {keywords_to_generate_heatmap_for}")
@@ -111,7 +119,12 @@ def main():
         # บันทึก Dictionary ทั้งหมดลงในไฟล์ .json
         with open(result_path, 'w', encoding='utf-8') as f: json.dump(result_data, f, indent=2, ensure_ascii=False)
         print(f"Saved results for {case_name} to {result_path}")
+    
     print("\nEvaluation run completed.")
+    
+    # --- ขั้นตอนที่ 4: สร้าง Heatmap สรุปผลหลังจากประมวลผลทุกเคสเสร็จ ---
+    # เรียกใช้ฟังก์ชันสร้าง heatmap ที่เราย้ายเข้ามาไว้ในไฟล์นี้
+    create_summary_heatmap(results_json_dir)
 
 if __name__ == "__main__":
     main()
