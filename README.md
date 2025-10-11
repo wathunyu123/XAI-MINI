@@ -1,5 +1,5 @@
 # 240-589 Explainable AI (XAI)
-Docker Container Deployment for MSSQL and Apache Airflow
+Dentist Assistant for Dental Anatomy Classification
 ## Author Information
 - Name: Wathunyu Phetpaya
 - Student Code: 6710120039
