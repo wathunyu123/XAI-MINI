@@ -1,0 +1,14 @@
+{
+  "image_path": "evaluation_dataset/anterior_teeth/case_001.jpg",
+  "expert_narrative": "The radiograph shows a porcelain-fused-to-metal (PFM) crown on the maxillary right central incisor (#8) and a distinct periapical radiolucency at the apex of the maxillary right lateral incisor (#7), consistent with a periapical lesion. Other anterior teeth appear to be within normal limits.",
+  "anterior_teeth_findings": {
+    "6": { "status": "normal", "notes": "" },
+    "7": { "status": "pathology", "notes": "periapical radiolucency indicating a lesion" },
+    "8": { "status": "restoration", "notes": "presence of a PFM crown" },
+    "9": { "status": "normal", "notes": "" },
+    "10": { "status": "normal", "notes": "" },
+    "11": { "status": "normal", "notes": "" }
+  },
+  "key_keywords_expected": ["crown", "lesion", "periapical", "restoration", "pathology"],
+  "analysis_focus": "Hypothesis test: How does the model react to unseen features (pathology/restoration)? Check for Omission, Mischaracterization, or successful Generalization."
+}

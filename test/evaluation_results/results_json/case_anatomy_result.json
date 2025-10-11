@@ -1,0 +1,9 @@
+{
+  "case_name": "case_anatomy",
+  "image_path": "evaluation_dataset/anterior_teeth/case_anatomy.jpg",
+  "ground_truth_path": "evaluation_dataset/anterior_teeth\\case_anatomy.json",
+  "analysis_focus": "Baseline check: Does the model correctly identify and describe normal anatomy as seen in training data?",
+  "generated_narrative": "The upper and lower arches. The upper (maxillary) arch contains six teeth: the two central incisors, the two lateral incisors flanking them, and the two pointed canines (also known as cuspids). Similarly, the lower (mandibular) arch is comprised of its corresponding six teeth: the two central incisors, the two lateral incisors, and the two canines (mandibular) arch is comprised of its corresponding six teeth: the two lateral incisors, the two canines) arch is comprised of its corresponding six teeth: the two canines (mands, the two canines (mandibular) arch is comprised of its corresponding six teeth: the two canines) arch is comprised of its corresponding) arch is comprised of its corresponding) arch is comprised, the two central incisors, and the lower (mandibular) arch is comprised, the smaller terms, and the lower (mandibular) arch is contained) arch is comprised of its corresponding) a two consecutive, the lower (mands. The lower (mandered incisors, the larger) a",
+  "expert_narrative": "The image shows the 12 untreated anterior teeth, including six in the upper maxillary arch and six in the lower mandibular arch. The teeth appear anatomically normal with no signs of caries, restorations, or significant pathology.",
+  "xai_explanations": {}
+}

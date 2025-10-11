@@ -1,0 +1,14 @@
+{
+  "image_path": "evaluation_dataset/anterior_teeth/case_anatomy.jpg",
+  "expert_narrative": "The image shows the 12 untreated anterior teeth, including six in the upper maxillary arch and six in the lower mandibular arch. The teeth appear anatomically normal with no signs of caries, restorations, or significant pathology.",
+  "anterior_teeth_findings": {
+    "6": { "status": "normal", "notes": "" },
+    "7": { "status": "normal", "notes": "" },
+    "8": { "status": "normal", "notes": "" },
+    "9": { "status": "normal", "notes": "" },
+    "10": { "status": "normal", "notes": "" },
+    "11": { "status": "normal", "notes": "" }
+  },
+  "key_keywords_expected": ["anterior teeth", "incisor", "canine", "maxillary", "mandibular", "normal"],
+  "analysis_focus": "Baseline check: Does the model correctly identify and describe normal anatomy as seen in training data?"
+}
