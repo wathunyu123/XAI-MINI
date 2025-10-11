@@ -1,3 +1,5 @@
 *.tar
 *.log
 test/llava-1.5-7b-hf-bnb-4bit
+test/llava-1.5-7b-merged-dentist
+test/adapter
