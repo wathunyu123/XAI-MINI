@@ -8,3 +8,4 @@ Docker Container Deployment for MSSQL and Apache Airflow
 - Degree: Master
 ## Documents
 - [SUMMARY.md](https://github.com/wathunyu123/XAI-MINI/blob/main/SUMMARY.md): สรุปทฤษฎี/เทคนิคสำคัญจากรายวิชา
+- [Project Directory](https://github.com/wathunyu123/XAI-MINI/tree/main/test): ไฟล์โปรเจคทั้งหมด
