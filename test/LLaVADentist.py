@@ -24,7 +24,7 @@ def get_gradients_hook(module, grad_in, grad_out):
 
 class LLaVADentist:
     def __init__(self, base_model_path, adapter_path):
-        # กำหนด Device ที่จะใช้ (GPU ถ้ามี, มิฉะนั้นใช้ CPU)
+        # กำหนด Device ที่จะใช้ (ถ้ามี GPU หากไม่มีให้ใช้ CPU แทน)
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         print(f"Initializing model with PEFT on device: {self.device}")
         
@@ -45,7 +45,7 @@ class LLaVADentist:
         )
         
         # --- โหลด Processor ---
-        # Processor ทำหน้าที่เตรียมข้อมูล (รูปภาพและข้อความ) ให้พร้อมสำหรับโมเดル
+        # Processor ทำหน้าที่เตรียมข้อมูล (รูปภาพและข้อความ) ให้พร้อมสำหรับโมเดล
         self.processor = AutoProcessor.from_pretrained(base_model_path, trust_remote_code=True)
 
         # --- ส่วนแก้ไขที่สำคัญ (Critical Fix) ---
@@ -72,7 +72,7 @@ class LLaVADentist:
             return f"Error: Image not found at {image_path}"
             
         # สร้าง Prompt ตาม format ของ LLaVA
-        prompt = f"USER: <image>\n{instruction}\nASSANT:"
+        prompt = f"USER: <image>\n{instruction}\nASSISTANT:"
         # ใช้ Processor เพื่อแปลงรูปภาพและข้อความเป็น Tensor ที่โมเดลเข้าใจ
         inputs = self.processor(text=prompt, images=image, return_tensors="pt").to(self.device)
         inputs['pixel_values'] = inputs['pixel_values'].to(self.model.dtype)
@@ -113,15 +113,27 @@ class LLaVADentist:
         # ตรวจสอบว่า Narrative ที่ได้มานั้นสมบูรณ์หรือไม่ ก่อนจะเริ่มทำ XAI
         if not full_text or "ASSISTANT:" not in full_text or not full_text.split("ASSISTANT:")[1].strip():
              return None
-        try:
-            # ระบุ Path ไปยัง Layer สุดท้ายของ Vision Tower ที่เราต้องการดักจับข้อมูล
-            vision_tower_last_layer = self.model.base_model.model.vision_tower.vision_model.encoder.layers[-1].layer_norm2
-        except AttributeError:
-            return None
+
+        # --- การแก้ไข: ค้นหา Layer เป้าหมายแบบไดนามิก แทนการใช้ Path ที่ตายตัว ---
+        target_layer = None
+        # วนลูปค้นหาโมดูลทั้งหมดในโมเดลเพื่อหา Layer ที่เราต้องการ
+        for name, module in self.model.named_modules():
+            # ชื่อของ Layer สุดท้ายใน Vision Encoder ของ LLaVA-v1.5 คือ layers.23 (เพราะมี 24 layers เริ่มจาก 0)
+            if name.endswith("vision_model.encoder.layers.23.layer_norm2"):
+                target_layer = module
+                # พิมพ์ข้อความดีบักเมื่อหาเจอ เพื่อยืนยันว่าโค้ดทำงานถูกต้อง
+                print(f"     [XAI DEBUG] Successfully found target layer: {name}")
+                break
         
-        # ติดตั้ง Hooks เข้ากับ Layer ที่ระบุ
-        forward_hook = vision_tower_last_layer.register_forward_hook(get_feature_maps_hook)
-        backward_hook = vision_tower_last_layer.register_full_backward_hook(get_gradients_hook)
+        # ถ้าวนลูปจนจบแล้วยังหา Layer ไม่เจอ ให้หยุดทำงานและคืนค่า None
+        if target_layer is None:
+            print("     [XAI ERROR] Could not find the target layer for hooks. Aborting heatmap generation.")
+            return None
+        # --------------------------------------------------------------------
+        
+        # ติดตั้ง Hooks เข้ากับ Layer ที่เราหาเจอ
+        forward_hook = target_layer.register_forward_hook(get_feature_maps_hook)
+        backward_hook = target_layer.register_full_backward_hook(get_gradients_hook)
         heatmap = None
         try:
             # (ส่วนที่เหลือของฟังก์ชันนี้คือกระบวนการคำนวณ Heatmap ที่คล้ายกับ Grad-CAM)
@@ -142,6 +154,10 @@ class LLaVADentist:
             model_output = self.model(**inputs, output_hidden_states=True)
             logits = model_output.logits
             
+            # เพิ่มการป้องกัน IndexError กรณีโมเดลสร้างคำตอบสั้นเกินไป
+            if logits.shape[1] < 2:
+                print("     [XAI ERROR] Generated sequence is too short for gradient calculation.")
+                return None
             # เลือก logit ของ token เป้าหมาย (ที่ตำแหน่งเกือบท้ายสุด)
             target_logit = logits[0, -2, target_token_id]
             # ทำ Backward Pass จาก logit นั้น เพื่อคำนวณ Gradient และดักจับผ่าน hook
@@ -154,9 +170,15 @@ class LLaVADentist:
                 for i in range(last_feature_maps.shape[0]): last_feature_maps[i, :, :] *= pooled_gradients[i]
                 heatmap = torch.mean(last_feature_maps, dim=0).cpu().detach().numpy()
                 heatmap = np.maximum(heatmap, 0)
-                if np.max(heatmap) > 0: heatmap /= np.max(heatmap)
+                
+                # เพิ่มการจัดการ Normalization ที่ทนทานขึ้น
+                max_val = np.max(heatmap)
+                if max_val > 1e-6: # ตรวจสอบว่าค่าสูงสุดไม่ใกล้ศูนย์เกินไป
+                    heatmap /= max_val
         except Exception as e:
-            print(f"An error occurred during heatmap generation for '{keyword}': {e}")
+            # พิมพ์ข้อความ error หากเกิดข้อผิดพลาดระหว่างการคำนวณ Gradient
+            print(f"     [XAI ERROR] An exception occurred during gradient calculation for '{keyword}': {e}")
+            heatmap = None
         finally:
             # นำ Hooks ออกเสมอ ไม่ว่าจะเกิด error หรือไม่ เพื่อป้องกัน memory leak
             forward_hook.remove(); backward_hook.remove()

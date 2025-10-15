@@ -10,7 +10,7 @@ from matplotlib.colors import ListedColormap
 # Path ไปยังโฟลเดอร์ที่เก็บไฟล์ผลลัพธ์ .json
 RESULTS_DIR = "evaluation_results/results_json/"
 
-def create_summary_heatmap(results_directory, filename="heatmaps/evaluation_summary_heatmap.png"):
+def CreateHeatMap(results_directory, filename="heatmaps/evaluation_summary_heatmap.png"):
     """
     อ่านไฟล์ผลลัพธ์ JSON จากการประเมิน แล้วสร้าง Heatmap สรุปผลการทำงาน (.png)
     """
