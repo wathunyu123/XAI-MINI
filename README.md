@@ -7,7 +7,8 @@ Dentist Assistant for Dental Anatomy Classification
 - Department: Computer Engineering
 - Degree: Master
 ## Documents
-- [SUMMARY.md](https://github.com/wathunyu123/XAI-MINI/blob/main/SUMMARY.md): สรุปทฤษฎี/เทคนิคสำคัญจากรายวิชา
-- [Project Directory](https://github.com/wathunyu123/XAI-MINI/tree/main/test): ไฟล์โปรเจคทั้งหมด
+- [SUMMARY.md](SUMMARY.md): สรุปทฤษฎี/เทคนิคสำคัญจากรายวิชา
+- [Project Directory](test): ไฟล์โปรเจคทั้งหมด
+- ผลลัพธ์ทั้งหมดของการทดลองโปรเจค [`Evaluation`](test/evaluation_results) Multi-modal Large Language Model (MLLM)
 ![Summary Heatmap](test/evaluation_results/heatmaps/evaluation_summary_heatmap.png)
 ![Rouge Score](test/evaluation_results/rouge_scores_heatmap.png)
