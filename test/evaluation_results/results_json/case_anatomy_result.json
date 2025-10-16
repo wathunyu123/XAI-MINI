@@ -3,13 +3,13 @@
   "image_path": "evaluation_dataset/anterior_teeth/case_anatomy.jpg",
   "ground_truth_path": "evaluation_dataset/anterior_teeth\\case_anatomy.json",
   "analysis_focus": "Test the model's ability to recognize and describe extensive cosmetic restorations (veneers/crowns) and differentiate them from natural, untreated teeth. Also checks for recognition of healthy gingival tissue.",
-  "generated_narrative": "The 12 untreated anterior teeth consist of its corresponding six teeth: the two central incisors, the two lateral incisors flanking them, and the two pointed canines (maxillary) arch is comprised of its corresponding six teeth: the two central incisors, the two lateral incisors, and the two canines (also known as cuspids). Similarly, the lower (mandibular) arch is comprised of its corresponding six teeth: the two central incisors, the two lateral incisors, and the two canines (mandibular) arch is comprised of its corresponding six teeth: the two canines (mands) arch is comprised of six teeth: the two canines (mandibular) arch is comprised of six colours) arch and two canines (mandibular) arch and six teeth) arches are comprised of six distinct mands that are the two lateral incisors, and the two canines (mandibular) arch and two canines (a more anterior) arch and five teeth) arch and two canines is comprised of a single cord which contiled close to the two",
+  "generated_narrative": "The 12 untreated anterior teeth consist of its corresponding six teeth: the two central incisors, the two lateral incisors flanking them, and the two pointed canines (also known as cuspids). Similarly, the lower (mandibular) arch is comprised of its corresponding six teeth: the two central incisors, the two lateral incisors, and the two canines (also known as cuspids). Similarly, the lower (mandibular) arch is comprised of its corresponding six teeth: the two central incisors, the two canines (mandibular) arch is comprised of its corresponding six teeth: the two canines (mandibular) arch is comprised of its corresponding six teeth) arch is comprised of six teeth: the two central incisors, the two canines (mandibular) arch and the two lateral incisors, and the two canines (mandibility, the upper and lower (mandibular) arch and three distinct, the two canines) arch and nine teeth) arches are included of their respective, the two lateral incisors, and the two",
   "expert_narrative": "This intraoral photograph displays a full-mouth cosmetic rehabilitation, most likely with porcelain veneers or full ceramic crowns on all visible teeth. The restorations are uniform in color, exhibit a high value (brightness), and are well-aligned, creating an aesthetic smile. The surrounding gingiva appears healthy, pink, and firm, with well-adapted margins around the restorations, indicating good periodontal health and oral hygiene. The teeth are shown in centric occlusion. Note the presence of slight physiological melanin pigmentation on the lower anterior gingiva.",
   "rouge_scores": {
-    "rouge1": 0.14937759336099585,
-    "rouge2": 0.016736401673640166,
-    "rougeL": 0.1078838174273859,
-    "rougeLsum": 0.1078838174273859
+    "rouge1": 0.12765957446808512,
+    "rouge2": 0.017167381974248927,
+    "rougeL": 0.10212765957446808,
+    "rougeLsum": 0.10212765957446808
   },
   "xai_explanations": {}
 }

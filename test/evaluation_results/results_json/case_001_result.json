@@ -3,13 +3,13 @@
   "image_path": "evaluation_dataset/anterior_teeth/case_001.jpg",
   "ground_truth_path": "evaluation_dataset/anterior_teeth\\case_001.json",
   "analysis_focus": "Test model's ability to identify subtle, non-carious findings like mild inflammation, recession, and wear, which are common but difficult to detect.",
-  "generated_narrative": "The 12 untreated anterior teeth consist of its corresponding six teeth: the two central incisors, the two lateral incisors flanking them, and the two pointed canines (maxillary) arch is comprised of its corresponding six teeth: the two central incisors, the two lateral incisors, and the two canines also known as cuspids). Similarly, the lower (mandibular) arch is comprised of its corresponding six teeth: the two central incisors, the two lateral incisors, and the two canines (also known as cuspids); similarly, the two canines each upper (mandibular) arch is comprised of its corresponding six teeth: the two central incisors, the two lateral incisors, and the two canines (mandibular) arch is comprised of its corresponding six teeth: the two canines (mands) arch and the two canines are included inceptions) at the lower (mandibular) arch and the two canines (mandibular) arch and the two canines (mils are the two lateral incisors, the two canines",
+  "generated_narrative": "The 12 untreated anterior teeth consist of its corresponding six teeth: the two central incisors, the two lateral incisors flanking them, and the lower (mandibular) arch is comprised of its corresponding six teeth: the two central incisors, the two lateral incisors, and the two canines (also known as cuspids). Similarly, the lower (mandibular) arch is comprised of its corresponding six teeth: the two central incisors, the two canines (also known as cusplanned anterior teeth: the two lateral incisors, the two canines (mands) arch is comprised of its corresponding six teeth: the two canines (mics) arch is composed of its corresponding six teeth: the two lateral incisors, the two canines (mandibular) arch is comprised of its corresponding six colours) upper (mandibular) arch and the two lateral incisors, the two canines (mandibular) at the two canines (mandibular) arch and the two lateral incisors, the two canines (a five cornersful)",
   "expert_narrative": "This intraoral photograph shows the anterior teeth in centric occlusion. The overall oral hygiene appears fair, with signs of mild gingival inflammation (gingivitis) characterized by redness and slight swelling along the gum margins, particularly in the mandibular anterior region. There is evidence of slight marginal gingival recession on the lower incisors. The maxillary teeth are well-aligned. The mandibular anterior teeth exhibit minor crowding. Slight incisal attrition (wear) is visible on the edges of the lower incisors. No obvious caries, fractures, or restorations are apparent in this view.",
   "rouge_scores": {
-    "rouge1": 0.23430962343096234,
-    "rouge2": 0.03375527426160337,
-    "rougeL": 0.18410041841004185,
-    "rougeLsum": 0.18410041841004185
+    "rouge1": 0.22127659574468084,
+    "rouge2": 0.04291845493562231,
+    "rougeL": 0.18723404255319148,
+    "rougeLsum": 0.18723404255319148
   },
   "xai_explanations": {}
 }

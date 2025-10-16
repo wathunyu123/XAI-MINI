@@ -84,4 +84,4 @@ def CreateHeatMap(results_directory, filename="heatmaps/evaluation_summary_heatm
     plt.show()
 
 if __name__ == "__main__":
-    create_summary_heatmap(RESULTS_DIR)
+    CreateHeatMap(RESULTS_DIR)
