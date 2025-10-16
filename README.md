@@ -9,4 +9,5 @@ Dentist Assistant for Dental Anatomy Classification
 ## Documents
 - [SUMMARY.md](https://github.com/wathunyu123/XAI-MINI/blob/main/SUMMARY.md): สรุปทฤษฎี/เทคนิคสำคัญจากรายวิชา
 - [Project Directory](https://github.com/wathunyu123/XAI-MINI/tree/main/test): ไฟล์โปรเจคทั้งหมด
-![Summary Heatmap](https://github.com/wathunyu123/XAI-MINI/blob/main/test/evaluation_results/heatmaps/evaluation_summary_heatmap.png)
+![Summary Heatmap](test/evaluation_results/heatmaps/evaluation_summary_heatmap.png)
+![Rouge Score](test/evaluation_results/rouge_scores_heatmap.png)
